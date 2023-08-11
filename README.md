@@ -5,10 +5,10 @@ Auction-Tests
 node v16.0.0
 
 # Previously deployed 
-Owner --> 0xa9902ea9e293381F67B1611C9425C109E25D252E 
-NFT Address --> 0x27cA174038Be8E186aEDbA8d5407A4891d81e068 (using MyNFT.sol)
-Bidder1 --> 0x5a345cE5d0adae69bB2B36dc87dDe32E2F5AE873
-Bidder2 --> 0x1f2DeACaeFf7541F9eE91Af0E8ea9202fEF14Df2
+1. Owner --> 0xa9902ea9e293381F67B1611C9425C109E25D252E 
+2. NFT Address --> 0x27cA174038Be8E186aEDbA8d5407A4891d81e068 (using MyNFT.sol)
+3. Bidder1 --> 0x5a345cE5d0adae69bB2B36dc87dDe32E2F5AE873
+4. Bidder2 --> 0x1f2DeACaeFf7541F9eE91Af0E8ea9202fEF14Df2
 
 # How to install
 git clone https://github.com/dariusjvc/Auction-Tests.git
