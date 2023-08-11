@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("NFTAuction", function () {
+describe("Tests for NFTAuction", function () {
   let NFTAuction;
   let nftAuction;
   let owner;
@@ -10,8 +10,7 @@ describe("NFTAuction", function () {
   let addrs;
 
   const minBid = ethers.utils.parseEther("0.001"); // Convert to Wei
-  const auctionDuration = 120; // Auction duration in seconds (2 minutes)
-
+  const auctionDuration = 5; // Auction duration in seconds 
   beforeEach(async function () {
     this.timeout(60000); 
     [owner, addr1, addr2, ...addrs] = await ethers.getSigners();
@@ -24,7 +23,7 @@ describe("NFTAuction", function () {
     await nftAuction.deployed();
   });
 
-  it("Should deploy the contract", async function () {
+  it("Deploy the contract", async function () {
     this.timeout(60000); 
     expect(await nftAuction.minBid()).to.equal(minBid);
   });
@@ -34,8 +33,8 @@ describe("NFTAuction", function () {
 
     // Convert the value to Wei using BigNumber
     const bidValue1 = ethers.utils.parseEther("0.001"); // Convert to Wei
-    // address1 hace la primera puja de 0.001 Ether
-    await nftAuction.connect(addr1).placeBid(1, { value: bidValue1 }); // Replace the second argument with the correct token ID
+    // address1 makes the first bid of 0.001 Ether
+    await nftAuction.connect(addr1).placeBid(1, { value: bidValue1 }); 
 
     // Check that addr1 is the highest bidder for tokenId 1
     const auctionInfo1 = await nftAuction.auctions(1);
@@ -44,8 +43,8 @@ describe("NFTAuction", function () {
 
     // Convert the value to Wei using BigNumber
     const bidValue2 = ethers.utils.parseEther("0.002"); // Convert to Wei
-    // address2 hace una puja de 0.002 Ether
-    await nftAuction.connect(addr2).placeBid(1, { value: bidValue2 }); // Replace the second argument with the correct token ID
+    // address2 bids 0.002 Ether
+    await nftAuction.connect(addr2).placeBid(1, { value: bidValue2 }); 
 
     // Verify that addr2 is the new highest bidder for tokenId 1
     const auctionInfo2 = await nftAuction.auctions(1);
@@ -53,18 +52,18 @@ describe("NFTAuction", function () {
     expect(auctionInfo2.bidAmount).to.equal(bidValue2);
   });
 
-  it("Transfer NFT to highest bidder", async function () {
+ it("Transfer NFT to highest bidder", async function () {
     const tokenId = 1; // ID of the token to auction
-
-    const highestBidderAddress = 0x1f2DeACaeFf7541F9eE91Af0E8ea9202fEF14Df2 ;// We assume that the second bidder is the winner
-
-    // Wait the time necessary for the auction to end
-    await ethers.provider.send("evm_increaseTime", [auctionDuration + 1]); // Increase the time by 1 second more than the duration of the auction
+  
+    const highestBidderAddress = "0x1f2DeACaeFf7541F9eE91Af0E8ea9202fEF14Df2"; // We assume that the second bidder is the winner
+  
+    // Increase the time by the auction duration to simulate the passage of time
+    await ethers.provider.send("evm_increaseTime", [auctionDuration]);
     await ethers.provider.send("evm_mine");
-
-   // Attempt to end the auction and transfer the NFT to the highest bidder
+  
+    // Attempt to end the auction and transfer the NFT to the highest bidder
     await nftAuction.transferNFTToHighestBidder(tokenId);
-
+  
     // Verify that the NFT has been transferred to the highest bidder
     const newOwner = await nftAuction.nftContract().ownerOf(tokenId);
     expect(newOwner).to.equal(highestBidderAddress);
