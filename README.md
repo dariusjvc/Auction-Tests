@@ -9,9 +9,9 @@ node v16.0.0
 2. NFTAuction.sol
 
 # How to install
-git clone https://github.com/dariusjvc/Auction-Tests.git
-npm install
-npx hardhat compile
+1. git clone https://github.com/dariusjvc/Auction-Tests.git
+2. npm install
+3. npx hardhat compile
 
 # Run the tests with:
 npx hardhat test
