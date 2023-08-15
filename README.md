@@ -13,7 +13,7 @@ node v16.0.0
 2. npm install
 3. npx hardhat compile
 
-# Run the tests with:
+# Run the tests with
 npx hardhat test
 
 # Description 
