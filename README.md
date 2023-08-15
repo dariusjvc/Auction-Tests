@@ -4,11 +4,9 @@ Auction-Tests
 # Requirements
 node v16.0.0
 
-# Previously deployed 
-1. Owner --> 0xa9902ea9e293381F67B1611C9425C109E25D252E 
-2. NFT Address --> 0x27cA174038Be8E186aEDbA8d5407A4891d81e068 (using MyNFT.sol)
-3. Bidder1 --> 0x5a345cE5d0adae69bB2B36dc87dDe32E2F5AE873
-4. Bidder2 --> 0x1f2DeACaeFf7541F9eE91Af0E8ea9202fEF14Df2
+# Smart Contracts
+1. MyNFT.sol
+2. NFTAuction.sol
 
 # How to install
 git clone https://github.com/dariusjvc/Auction-Tests.git
@@ -19,7 +17,15 @@ npx hardhat compile
 npx hardhat test
 
 # Description 
-There are three tests, the first makes the deployment, the second bids from two users and the third sends the nft to the highest bidder. We assume that the second bidder is the winner, and in the third test the send is made to that winner.
+There the following tests:
+
+1. Test1: Verifies that the MyNFT smart contract has been deployed
+2. Test2: Verifies that the NFTAuction smart contract has been deployed
+3. Test3: Verifies the correct initial values for NFTAuction
+4. Test4: Allow bidder1 to place a bid
+5. Test5: Allow bidder2 to place a higher bid
+6. Test6: Transfer NFT to the highest bidder after auction ends
+
 
 
 
